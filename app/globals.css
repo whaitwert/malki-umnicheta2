@@ -1,27 +1,134 @@
+@import url("https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+.font-comic {
+  font-family: "Comic Neue", cursive;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Ensure proper viewport height handling on mobile */
+html {
+  height: -webkit-fill-available;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: -webkit-fill-available;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+.moving-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, #FF9A9E, #FAD0C4, #A1C4FD, #C2E9FB);
+  background-size: 300% 300%;
+  animation: gradientBG 20s ease infinite;
+  z-index: 0;
+  overflow: hidden;
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
+
+@layer base {
+  body {
+    @apply antialiased;
+  }
+}
+
+@layer components {
+  .card-hover {
+    @apply transition-transform duration-300 hover:scale-105 hover:shadow-xl;
+  }
+  
+  .page-container {
+    @apply container mx-auto px-4 py-8 bg-white/90 rounded-lg shadow-lg backdrop-blur-sm my-8;
+  }
+
+  .section-title {
+    @apply text-3xl font-comic text-primary mb-6 text-center;
+  }
+
+  .grid-layout {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6;
+  }
+}
+
+.footer-gradient {
+  background: linear-gradient(
+    45deg,
+    #3490dc 0%,
+    #6574cd 50%,
+    #9561e2 100%
+  );
+}
+
+.cartoon-character {
+  position: absolute;
+  opacity: 0.6;
+  z-index: 1;
+}
+
+.character1 {
+  top: 5%;
+  left: 5%;
+  animation: float 8s ease-in-out infinite;
+}
+
+.character2 {
+  top: 70%;
+  right: 10%;
+  animation: float 9s ease-in-out infinite;
+}
+
+.character3 {
+  bottom: 15%;
+  left: 15%;
+  animation: float 7s ease-in-out infinite;
+}
+
+.character4 {
+  top: 30%;
+  right: 20%;
+  animation: float 10s ease-in-out infinite;
+}
+
+.character5 {
+  bottom: 30%;
+  left: 40%;
+  animation: float 11s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(5deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
