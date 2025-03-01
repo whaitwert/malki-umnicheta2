@@ -41,7 +41,7 @@ export default function RegisterPage() {
       );
       setUser(newUser);
       router.push("/");
-    } catch (error) {
+    } catch {
       setError("Грешка при регистрация на потребителя");
     }
   };
@@ -51,7 +51,7 @@ export default function RegisterPage() {
       const user = await signInWithGoogle();
       setUser(user);
       router.push("/");
-    } catch (error) {
+    } catch {
       setError("Грешка при регистрация с Google");
     }
   };

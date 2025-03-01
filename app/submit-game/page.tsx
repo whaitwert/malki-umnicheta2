@@ -64,7 +64,7 @@ export default function SubmitGame() {
     setIsSubmitting(true);
     try {
       const thumbnailUrl = await uploadImageToImgBB(thumbnail);
-      const newGame = await submitGame({
+      await submitGame({
         ...formData,
         creator: {
           id: user.id,
@@ -85,7 +85,9 @@ export default function SubmitGame() {
   };
 
   if (loading) {
-    return <div className="flex-1 container mx-auto px-4 py-8">Зареждане...</div>;
+    return (
+      <div className="flex-1 container mx-auto px-4 py-8">Зареждане...</div>
+    );
   }
 
   if (!user) {
@@ -161,7 +163,9 @@ export default function SubmitGame() {
             <label htmlFor="grade" className="block mb-1">
               Клас
             </label>
-            <Select onValueChange={(value) => handleSelectChange("grade", value)}>
+            <Select
+              onValueChange={(value) => handleSelectChange("grade", value)}
+            >
               <SelectTrigger>
                 <SelectValue placeholder="Избери клас" />
               </SelectTrigger>
@@ -203,12 +207,12 @@ export default function SubmitGame() {
           </Button>
         </form>
         <div className="w-full lg:w-1/2 flex items-start justify-center">
-          <video 
-            src="/video1.mp4" 
+          <video
+            src="/video1.mp4"
             className="w-full max-w-[600px] rounded-lg shadow-lg"
             height="auto"
-            controls 
-            autoPlay 
+            controls
+            autoPlay
           />
         </div>
       </div>
